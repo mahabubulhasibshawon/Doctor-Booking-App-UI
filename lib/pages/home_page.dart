@@ -1,3 +1,4 @@
+import 'package:doctor_booking_ui/tile/categorie_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,10 +8,10 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePage> createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
 
   List<String> categories = ['Adults', 'Childrens', 'Women', 'Men'];
 
@@ -69,7 +70,19 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 20,),
               Container(
-
+                height: 30,
+                child: ListView.builder(
+                    itemCount: categories.length,
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                  return CategorieTile(
+                    categorie: categories[index],
+                    isSelected: selectedCategorie == categories[index],
+                    context: this,
+                  );
+                }),
               )
             ],
           ),
